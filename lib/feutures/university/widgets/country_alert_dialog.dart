@@ -10,7 +10,7 @@ class CountryAlertDialog extends StatelessWidget {
     final countryController = TextEditingController();
 
     return AlertDialog(
-      title: Text('Напишите странну'),
+      title: Text('Напишите страну'),
       backgroundColor: Colors.white,
       content: SizedBox(
         width: 500,
