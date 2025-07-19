@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:university_search/feutures/university/widgets/search_text_field.dart';
+import 'package:university_search/feutures/university/widgets/university_text_fields.dart';
 
 class CountryAlertDialog extends StatelessWidget {
   const CountryAlertDialog({super.key});
@@ -14,10 +14,7 @@ class CountryAlertDialog extends StatelessWidget {
       backgroundColor: Colors.white,
       content: SizedBox(
         width: 500,
-        child: SearchTextField(
-          controller: countryController,
-          onSubmitted: (value) {},
-        ),
+        child: CountryTextField(controller: countryController),
       ),
 
       actions: [

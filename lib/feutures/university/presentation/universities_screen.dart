@@ -5,7 +5,7 @@ import 'package:university_search/feutures/university/presentation/bloc/universi
 import 'package:university_search/feutures/university/presentation/bloc/university_event.dart';
 import 'package:university_search/feutures/university/presentation/bloc/university_state.dart';
 import 'package:university_search/feutures/university/widgets/country_alert_dialog.dart';
-import 'package:university_search/feutures/university/widgets/search_text_field.dart';
+import 'package:university_search/feutures/university/widgets/university_text_fields.dart';
 
 class UniversitiesScreen extends StatefulWidget {
   const UniversitiesScreen({super.key});
@@ -15,7 +15,7 @@ class UniversitiesScreen extends StatefulWidget {
 }
 
 class _UniversitiesScreenState extends State<UniversitiesScreen> {
-  final _searchController = TextEditingController();
+  final nameController = TextEditingController();
 
   final ScrollController scrollController = ScrollController();
 
@@ -38,7 +38,7 @@ class _UniversitiesScreenState extends State<UniversitiesScreen> {
   @override
   void dispose() {
     scrollController.dispose();
-    _searchController.dispose();
+    nameController.dispose();
     super.dispose();
   }
 
@@ -51,12 +51,12 @@ class _UniversitiesScreenState extends State<UniversitiesScreen> {
           children: [
             Row(
               children: [
-                SearchTextField(
-                  controller: _searchController,
+                NameTextField(
+                  controller: nameController,
                   onSubmitted: (value) {
                     universityBloc.add(
                       UniversityEventFetch(
-                        name: _searchController.text,
+                        name: nameController.text,
                         country: country,
                       ),
                     );
@@ -73,7 +73,7 @@ class _UniversitiesScreenState extends State<UniversitiesScreen> {
                     );
                     universityBloc.add(
                       UniversityEventFetch(
-                        name: _searchController.text,
+                        name: nameController.text,
                         country: country,
                       ),
                     );

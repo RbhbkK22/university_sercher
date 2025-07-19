@@ -2,13 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:university_search/feutures/university/domain/entities/university.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CurrentUniversity extends StatelessWidget {
+class CurrentUniversity extends StatefulWidget {
   final University university;
 
   const CurrentUniversity({super.key, required this.university});
 
   @override
+  State<CurrentUniversity> createState() => _CurrentUniversityState();
+}
+
+class _CurrentUniversityState extends State<CurrentUniversity> {
+  Future<void> _lunchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else if (mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Не удалось открыть ссылку')));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final university = widget.university;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -28,14 +45,14 @@ class CurrentUniversity extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SelectableText(
-                        university.name,
+                        widget.university.name,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       SelectableText(
-                        'Страна: ${university.country}',
+                        'Страна: ${widget.university.country}',
                         style: TextStyle(fontSize: 16),
                       ),
                       Text('Ссылки:', style: TextStyle(fontSize: 16)),
@@ -43,21 +60,7 @@ class CurrentUniversity extends StatelessWidget {
                           university.webPages!.isNotEmpty)
                         ...university.webPages!.map(
                           (url) => InkWell(
-                            onTap: () async {
-                              final uri = Uri.parse(url);
-                              if (await canLaunchUrl(uri)) {
-                                await launchUrl(
-                                  uri,
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Не удалось открыть ссылку'),
-                                  ),
-                                );
-                              }
-                            },
+                            onTap: () => _lunchUrl(url),
                             child: Text(
                               url,
                               style: TextStyle(
