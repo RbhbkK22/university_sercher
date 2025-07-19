@@ -15,3 +15,6 @@
 
 <img width="374" height="829" alt="image" src="https://github.com/user-attachments/assets/6c2238cc-4202-4a27-a901-fa38d9ddf2ef" />
 
+Экран с информацией про университет
+
+<img width="367" height="815" alt="image" src="https://github.com/user-attachments/assets/81eb3620-df2c-421c-a554-fa7c86d99213" />
