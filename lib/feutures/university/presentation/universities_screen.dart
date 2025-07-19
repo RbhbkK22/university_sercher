@@ -45,8 +45,8 @@ class _UniversitiesScreenState extends State<UniversitiesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: 50, left: 10, right: 10),
+      body: SafeArea(
+        minimum: EdgeInsets.only(right: 15, left: 15),
         child: Column(
           children: [
             Row(
